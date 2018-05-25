@@ -1,4 +1,10 @@
 {
+    "beberlei/assert": {
+        "version": "v2.9.5"
+    },
+    "clue/stream-filter": {
+        "version": "v1.4.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -56,8 +62,17 @@
     "doctrine/orm": {
         "version": "v2.6.1"
     },
+    "fgrosse/phpasn1": {
+        "version": "2.0.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.4.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "mdanter/ecc": {
+        "version": "v0.5.0"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",
@@ -68,6 +83,9 @@
             "ref": "7b6cbc842f8cd3d550815247d12294f6f304a8c4"
         }
     },
+    "nesbot/carbon": {
+        "version": "1.29.0"
+    },
     "nikic/php-parser": {
         "version": "v4.0.1"
     },
@@ -77,11 +95,38 @@
     "ocramius/proxy-manager": {
         "version": "2.2.0"
     },
+    "okta/jwt-verifier": {
+        "version": "0.2.1"
+    },
+    "php-http/client-common": {
+        "version": "1.7.0"
+    },
+    "php-http/curl-client": {
+        "version": "v1.7.1"
+    },
+    "php-http/discovery": {
+        "version": "1.4.0"
+    },
+    "php-http/httplug": {
+        "version": "v1.1.0"
+    },
+    "php-http/message": {
+        "version": "1.6.0"
+    },
+    "php-http/message-factory": {
+        "version": "v1.0.2"
+    },
+    "php-http/promise": {
+        "version": "v1.0.0"
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
     "psr/container": {
         "version": "1.0.0"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
     },
     "psr/log": {
         "version": "1.0.2"
@@ -97,6 +142,18 @@
             "version": "4.0",
             "ref": "aaddfdf43cdecd4cf91f992052d76c2cadc04543"
         }
+    },
+    "spomky-labs/aes-key-wrap": {
+        "version": "v4.0.1"
+    },
+    "spomky-labs/base64url": {
+        "version": "v1.0.2"
+    },
+    "spomky-labs/jose": {
+        "version": "v7.1.0"
+    },
+    "spomky-labs/php-aes-gcm": {
+        "version": "v1.2.0"
     },
     "symfony/cache": {
         "version": "v4.0.10"
@@ -170,6 +227,9 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v4.0.11"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
@@ -186,6 +246,15 @@
             "branch": "master",
             "version": "4.0",
             "ref": "cda8b550123383d25827705d05a42acf6819fe4e"
+        }
+    },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "6bcd6c570c017ea6ae5a7a6a027c929fd3542cd8"
         }
     },
     "symfony/yaml": {

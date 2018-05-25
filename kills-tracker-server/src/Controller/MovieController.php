@@ -16,6 +16,10 @@ class MovieController extends ApiController
     */
     public function index(MovieRepository $movieRepository)
     {
+        if (! $this->isAuthorized()) {
+            return $this->respondUnauthorized();
+        }
+
         $movies = $movieRepository->transformAll();
 
         return $this->respond($movies);
@@ -27,6 +31,10 @@ class MovieController extends ApiController
      */
     public function show($id, MovieRepository $movieRepository)
     {
+        if (! $this->isAuthorized()) {
+            return $this->respondUnauthorized();
+        }
+
         $movie = $movieRepository->find($id);
 
         if (! $movie) {
@@ -44,6 +52,10 @@ class MovieController extends ApiController
     */
     public function create(Request $request, EntityManagerInterface $em)
     {
+        if (! $this->isAuthorized()) {
+            return $this->respondUnauthorized();
+        }
+
         // validate the title
         if (! $request->query->get('title')) {
             return $this->respondValidationError('Please provide a title!');
@@ -65,6 +77,9 @@ class MovieController extends ApiController
     */
     public function update($id, Request $request, EntityManagerInterface $em, MovieRepository $movieRepository)
     {
+        if (! $this->isAuthorized()) {
+            return $this->respondUnauthorized();
+        }
 
         $errors = [];
 

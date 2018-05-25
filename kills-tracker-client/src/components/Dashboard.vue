@@ -1,34 +1,42 @@
 <template>
-    <table>
-        <tbody>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Count</th>
-            </tr>
-            <template v-for="movie in movies">
-                <tr v-bind:key="movie.id">
-                    <td>{{ movie.id }}</td>
-                    <td>{{ movie.title }}</td>
-                    <td>{{ movie.count }}</td>
-                </tr>
-            </template>
-        </tbody>
-    </table>
+    <div class="container">
+        <router-link to="/" tag="button" id='home-button'> Home </router-link>
+        <router-link to="/movies" v-if='authenticated' tag="button" id='home-button'> Movies </router-link>
+        <button v-if='authenticated' v-on:click='logout' id='logout-button'> Logout </button>
+        <button v-else v-on:click='login' id='login-button'> Login </button>
+        <router-view>
+        </router-view>
+    </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
-    data() {
+    data: function () {
         return {
-            movies: {}
+            authenticated: false
         }
     },
-    async created () {
-        const response = await axios.get('http://localhost:8000/movies')
-        this.movies = response.data
+    created () {
+        this.isAuthenticated()
+    },
+    watch: {
+        // Everytime the route changes, check for auth status
+        '$route': 'isAuthenticated'
+    },
+    methods: {
+        async isAuthenticated () {
+            this.authenticated = await this.$auth.isAuthenticated()
+        },
+        login () {
+            this.$auth.loginRedirect('/')
+        },
+        async logout () {
+            await this.$auth.logout()
+            await this.isAuthenticated()
+
+            // Navigate back to home
+            this.$router.push({ path: '/' })
+        }
     }
 }
 </script>
