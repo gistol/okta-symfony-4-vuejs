@@ -50,51 +50,40 @@ class MovieController extends ApiController
     * @Route("/movies")
     * @Method("POST")
     */
-    public function create(Request $request, EntityManagerInterface $em)
+    public function create(Request $request, MovieRepository $movieRepository, EntityManagerInterface $em)
     {
         if (! $this->isAuthorized()) {
             return $this->respondUnauthorized();
         }
 
+        $request = $this->transformJsonBody($request);
+        if (! $request) {
+            return $this->respondValidationError('Please provide a valid request!');
+        }
+
         // validate the title
-        if (! $request->query->get('title')) {
+        if (! $request->get('title')) {
             return $this->respondValidationError('Please provide a title!');
         }
 
         // persist the new movie
         $movie = new Movie;
-        $movie->setTitle($request->query->get('title'));
+        $movie->setTitle($request->get('title'));
         $movie->setCount(0);
         $em->persist($movie);
         $em->flush();
 
-        return $this->respondCreated();
+        return $this->respondCreated($movieRepository->transform($movie));
     }
 
     /**
-    * @Route("/movies/{id}")
-    * @Method("PUT")
+    * @Route("/movies/{id}/count")
+    * @Method("POST")
     */
-    public function update($id, Request $request, EntityManagerInterface $em, MovieRepository $movieRepository)
+    public function increaseCount($id, EntityManagerInterface $em, MovieRepository $movieRepository)
     {
         if (! $this->isAuthorized()) {
             return $this->respondUnauthorized();
-        }
-
-        $errors = [];
-
-        // validate the title
-        if (! $request->query->get('title')) {
-            $errors[] = 'Please provide a title!';
-        }
-
-        // validate the count
-        if (! $request->query->get('count')) {
-            $errors[] = 'Please provide a count!';
-        }
-
-        if (count($errors)) {
-            return $this->respondValidationError($errors);
         }
 
         $movie = $movieRepository->find($id);
@@ -103,12 +92,30 @@ class MovieController extends ApiController
             return $this->respondNotFound();
         }
 
-        $movie->setTitle($request->query->get('title'));
-        $movie->setCount((int) $request->query->get('count'));
+        $movie->setCount($movie->getCount() + 1);
         $em->persist($movie);
         $em->flush();
 
-        return $this->respond([]);
+        return $this->respond([
+            'count' => $movie->getCount()
+        ]);
+    }
+
+    private function transformJsonBody(Request $request)
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        if ($data === null) {
+            return $request;
+        }
+
+        $request->request->replace($data);
+
+        return $request;
     }
 
 }
