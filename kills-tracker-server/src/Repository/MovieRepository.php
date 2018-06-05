@@ -51,9 +51,9 @@ class MovieRepository extends ServiceEntityRepository
     public function transform(Movie $movie)
     {
         return [
-                'id'    => (int) $movie->getId(),
-                'title' => (string) $movie->getTitle(),
-                'count' => (int) $movie->getCount()
+            'id'    => (int) $movie->getId(),
+            'title' => (string) $movie->getTitle(),
+            'count' => (int) $movie->getCount()
         ];
     }
 

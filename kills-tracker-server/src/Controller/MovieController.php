@@ -101,21 +101,4 @@ class MovieController extends ApiController
         ]);
     }
 
-    private function transformJsonBody(Request $request)
-    {
-        $data = json_decode($request->getContent(), true);
-
-        if (json_last_error() !== JSON_ERROR_NONE) {
-            return null;
-        }
-
-        if ($data === null) {
-            return $request;
-        }
-
-        $request->request->replace($data);
-
-        return $request;
-    }
-
 }
