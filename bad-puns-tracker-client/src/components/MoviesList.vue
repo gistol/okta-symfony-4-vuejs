@@ -6,7 +6,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Kills Count</th>
+                    <th>Bad Puns Count</th>
                     <th>Actions</th>
                 </tr>
             </thead>

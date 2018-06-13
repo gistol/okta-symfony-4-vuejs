@@ -9,7 +9,7 @@ $ git clone git@github.com:Endymion1977/okta-symfony-4-vuejs.git
 Create a database and user. Copy and edit the `.env` file and put the db details there:
 
 ```
-$ cd kills-tracker-server
+$ cd bad-puns-tracker-server
 $ cp .env.dist .env
 ```
 
@@ -28,7 +28,7 @@ Loading [127.0.0.1:8000](127.0.0.1:8000) now should show the default Symfony 4 p
 Edit the OKTA configuration in `src/main.js`. Then install the dependencies and run the server:
 
 ```
-$ cd kills-tracker-client
+$ cd bad-puns-tracker-client
 $ npm install -g @vue/cli
 $ yarn
 $ yarn serve
