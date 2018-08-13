@@ -11,8 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class MovieController extends ApiController
 {
     /**
-    * @Route("/movies")
-    * @Method("GET")
+    * @Route("/movies", methods="GET")
     */
     public function index(MovieRepository $movieRepository)
     {
@@ -26,29 +25,7 @@ class MovieController extends ApiController
     }
 
     /**
-     * @Route("/movies/{id}")
-     * @Method("GET")
-     */
-    public function show($id, MovieRepository $movieRepository)
-    {
-        if (! $this->isAuthorized()) {
-            return $this->respondUnauthorized();
-        }
-
-        $movie = $movieRepository->find($id);
-
-        if (! $movie) {
-            return $this->respondNotFound();
-        }
-
-        $movie = $movieRepository->transform($movie);
-
-        return $this->respond($movie);
-    }
-
-    /**
-    * @Route("/movies")
-    * @Method("POST")
+    * @Route("/movies", methods="POST")
     */
     public function create(Request $request, MovieRepository $movieRepository, EntityManagerInterface $em)
     {
@@ -77,8 +54,7 @@ class MovieController extends ApiController
     }
 
     /**
-    * @Route("/movies/{id}/count")
-    * @Method("POST")
+    * @Route("/movies/{id}/count", methods="POST")
     */
     public function increaseCount($id, EntityManagerInterface $em, MovieRepository $movieRepository)
     {

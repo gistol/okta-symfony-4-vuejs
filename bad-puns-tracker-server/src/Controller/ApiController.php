@@ -142,7 +142,7 @@ class ApiController
             $jwtVerifier = (new \Okta\JwtVerifier\JwtVerifierBuilder())
                             ->setAdaptor(new \Okta\JwtVerifier\Adaptors\SpomkyLabsJose())
                             ->setAudience('api://default')
-                            ->setClientId('0oaf2w64cvmQbcoUH0h7')
+                            ->setClientId('0oafx0btortHF8EEJ0h7')
                             ->setIssuer('https://dev-354685.oktapreview.com/oauth2/default')
                             ->build();
 
